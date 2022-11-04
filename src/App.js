@@ -1,5 +1,6 @@
 // import React from 'react';
 import Expenses from './components/Expenses/Expenses';
+import NewExpense from './components/NewExpense/NewExpense';
 
 const App = () => {
     const expenses = [
@@ -29,7 +30,12 @@ const App = () => {
         }
     ];
 
-    return <Expenses items={expenses} />;
+    return (
+        <div>
+            <NewExpense />
+            <Expenses items={expenses} />
+        </div>
+    );
 
     // Without using JSX (this is how it works under the hood and that's why only 1 element must be returned)
     // return React.createElement(
