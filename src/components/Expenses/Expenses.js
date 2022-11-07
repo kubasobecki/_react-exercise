@@ -7,7 +7,7 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 
 function Expenses(props) {
-    const [selectedYear, setSelectedYear] = useState('2022');
+    const [selectedYear, setSelectedYear] = useState('2021');
 
     useEffect(() => {
         console.log(selectedYear);
@@ -17,16 +17,16 @@ function Expenses(props) {
         setSelectedYear(year);
     };
 
-    const expenseItems = props.items.map((expense, index) => {
-        return (
+    const expenseItemsFiltered = props.items
+        .filter(expense => expense.date.getFullYear() === +selectedYear)
+        .map(expense => (
             <ExpenseItem
+                key={expense.id}
                 title={expense.title}
                 amount={expense.amount}
                 date={expense.date}
-                key={index}
             />
-        );
-    });
+        ));
 
     return (
         <Card className="expenses">
@@ -34,7 +34,7 @@ function Expenses(props) {
                 onYearChange={yearChangeHandler}
                 initialValue={selectedYear}
             />
-            {expenseItems}
+            {expenseItemsFiltered}
         </Card>
     );
 }
